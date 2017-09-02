@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="AYW-gb-gIY">
             <objects>
-                <viewController id="XoK-V9-GCE" customClass="ViewController" customModule="Flutterasia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XoK-V9-GCE" customClass="ViewController" customModule="Flutterasia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NwY-0y-By6"/>
                         <viewControllerLayoutGuide type="bottom" id="vIT-5D-ScZ"/>
