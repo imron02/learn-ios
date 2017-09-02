@@ -20,17 +20,20 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLogin")
-        
-        if !isUserLoggedIn {
-            self.performSegue(withIdentifier: "loginView", sender: self)
-        }
-    }
-    
     @IBAction func logoutButtonTapped(_ sender: Any) {
         UserDefaults.standard.set(false, forKey: "isUserLogin")
-        self.performSegue(withIdentifier: "loginView", sender: self)
+        
+        // Set to login page
+        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginController = loginStoryboard.instantiateViewController(withIdentifier: "LoginController") as! LoginController
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: loginController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
+            appDelegate.window?.rootViewController = loginController
+            appDelegate.window?.makeKeyAndVisible()
+        }
+        
+//        self.performSegue(withIdentifier: "loginView", sender: self)
     }
     
 }

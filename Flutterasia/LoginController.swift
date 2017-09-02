@@ -40,8 +40,17 @@ class LoginController: UIViewController {
         
         // Check from stored data
         if userEmail == userEmailStored && userPassword == userPasswordStored {
-            self.dismiss(animated: true, completion: nil)
             UserDefaults.standard.set(true, forKey: "isUserLogin")
+            
+            // Set to main page
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: viewController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
+                appDelegate.window?.rootViewController = viewController
+                appDelegate.window?.makeKeyAndVisible()
+            }
         } else {
             displayAlertMessage(message: "Your username or password is wrong!")
         }
