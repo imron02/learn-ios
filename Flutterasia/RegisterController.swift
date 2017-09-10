@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class RegisterController: UIViewController {
+class RegisterController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -20,22 +20,30 @@ class RegisterController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         // Scroll view hide keyboar
-         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterController.dismissKeyboard))
         scrollView.addGestureRecognizer(tap)
         
         // Move up content on keyboard show
         scrollView.contentSize = CGSize(width: 400, height: 2300)
         NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        
+        // Delegate text field
+        textFieldDelegate()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldDelegate() -> Void {
+        self.fullNameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.retypePasswordTextField.delegate = self
     }
     
     @IBAction func registerButtonTapped(_ sender: Any) {
@@ -100,6 +108,11 @@ class RegisterController: UIViewController {
     
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
     
     @objc func keyboardWillBeShown(notification: NSNotification) {
