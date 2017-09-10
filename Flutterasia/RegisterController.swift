@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterController: UIViewController {
 
@@ -47,10 +48,48 @@ class RegisterController: UIViewController {
         }
         
         // Store data
-        UserDefaults.standard.set(email, forKey: "userEmail")
-        UserDefaults.standard.set(password, forKey: "userPassword")
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if let firebaseError = error {
+                self.displayAlertMessage(message: firebaseError.localizedDescription)
+                return
+            }
+            
+            // Update data
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = fullName
+            changeRequest?.photoURL = URL(string: "https://lh6.googleusercontent.com/-n7gzvVydeS8/AAAAAAAAAAI/AAAAAAAAAZs/R6peU2B6R6o/photo.jpg?sz=64")
+            changeRequest?.commitChanges(completion: { (error) in
+                if let changeReqError = error {
+                    print(changeReqError.localizedDescription)
+                    return
+                }
+                
+                self.displaySuccessMessage(message: "Registration is successful")
+            })
+        }
+    }
+    
+    override func displaySuccessMessage(message: String) {
+        let alertMessage = UIAlertController(title: "Success", message: message, preferredStyle: UIAlertControllerStyle.alert)
         
-        displaySuccessMessage(message: "Registration is successful")
+        let btnAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (action) in
+            // Set to main page
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: viewController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
+                appDelegate.window?.rootViewController = viewController
+                appDelegate.window?.makeKeyAndVisible()
+            }
+        }
+        
+        alertMessage.addAction(btnAction)
+        self.present(alertMessage, animated: true, completion: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
 }
