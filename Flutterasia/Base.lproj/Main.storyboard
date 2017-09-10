@@ -36,12 +36,20 @@
                                     <action selector="logoutButtonTapped:" destination="XoK-V9-GCE" eventType="touchUpInside" id="P1b-jO-UVQ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e57-Uo-HvP">
+                                <rect key="frame" x="16" y="145" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="i1I-WS-RqH"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="welcomeLabel" destination="e57-Uo-HvP" id="zcv-ab-pF0"/>
                         <segue destination="wXq-A2-Biw" kind="presentation" identifier="loginView" id="Z69-sA-MTI"/>
                     </connections>
                 </viewController>
