@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginController: UIViewController {
     
@@ -30,17 +31,19 @@ class LoginController: UIViewController {
         let userEmail = emailTextField.text
         let userPassword = passwordTextField.text
         
-        let userEmailStored = UserDefaults.standard.string(forKey: "userEmail")
-        let userPasswordStored = UserDefaults.standard.string(forKey: "userPassword")
-        
         // Check empty field
         if (userEmail?.isEmpty)! && (userPassword?.isEmpty)! {
             displayAlertMessage(message: "All field are required.")
+            return
         }
         
-        // Check from stored data
-        if userEmail == userEmailStored && userPassword == userPasswordStored {
-            UserDefaults.standard.set(true, forKey: "isUserLogin")
+        // Check firebase data
+        Auth.auth().signIn(withEmail: userEmail!, password: userPassword!) { (user, error) in
+            if let firebaseError = error {
+                self.displayAlertMessage(message: firebaseError.localizedDescription)
+                print(firebaseError.localizedDescription)
+                return
+            }
             
             // Set to main page
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -51,8 +54,6 @@ class LoginController: UIViewController {
                 appDelegate.window?.rootViewController = viewController
                 appDelegate.window?.makeKeyAndVisible()
             }
-        } else {
-            displayAlertMessage(message: "Your username or password is wrong!")
         }
     }
 
