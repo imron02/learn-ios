@@ -75,6 +75,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="4UR-Fd-8Tr">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ie6-gB-jaz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
