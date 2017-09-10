@@ -92,12 +92,12 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         
         let btnAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (action) in
             // Set to main page
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            let tabBarStoryboard = UIStoryboard(name: "MenuTabbar", bundle: nil)
+            let tabBarController = tabBarStoryboard.instantiateViewController(withIdentifier: "MenuTabbar") as! UITabBarController
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
-            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: viewController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
-                appDelegate.window?.rootViewController = viewController
+            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: tabBarController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
+                appDelegate.window?.rootViewController = tabBarController
                 appDelegate.window?.makeKeyAndVisible()
             }
         }
