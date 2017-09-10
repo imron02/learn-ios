@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBAction func unwindToLogInScreen(unwindSegue: UIStoryboardSegue) {}
 
@@ -19,12 +19,18 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Textfield delegate
+        textFieldDelegate()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldDelegate() -> Void {
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
     }
     
     @IBAction func signinClick(_ sender: Any) {
@@ -36,7 +42,7 @@ class LoginController: UIViewController {
             displayAlertMessage(message: "All field are required.")
             return
         }
-        
+
         // Check firebase data
         Auth.auth().signIn(withEmail: userEmail!, password: userPassword!) { (user, error) in
             if let firebaseError = error {
@@ -44,17 +50,28 @@ class LoginController: UIViewController {
                 print(firebaseError.localizedDescription)
                 return
             }
-            
+
             // Set to main page
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            let mainStoryboard = UIStoryboard(name: "Menu", bundle: nil)
+            let tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MenuTabbar") as! UITabBarController
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            
-            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: viewController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
-                appDelegate.window?.rootViewController = viewController
+
+            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: tabBarController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
+                appDelegate.window?.rootViewController = tabBarController
                 appDelegate.window?.makeKeyAndVisible()
             }
         }
+        
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 
 }
