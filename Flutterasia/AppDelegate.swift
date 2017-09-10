@@ -41,13 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         if Auth.auth().currentUser != nil {
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            let menuTabbar = UIStoryboard(name: "Menu", bundle: nil)
+            let tabBarController = menuTabbar.instantiateViewController(withIdentifier: "MenuTabbar") as! UITabBarController
             
-            self.window?.rootViewController = viewController
+            self.window?.rootViewController = tabBarController
             self.window?.makeKeyAndVisible()
         } else {
-            let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+            let loginStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let loginController = loginStoryboard.instantiateViewController(withIdentifier: "LoginController") as! LoginController
             
             self.window?.rootViewController = loginController
