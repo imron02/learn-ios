@@ -10,30 +10,28 @@
 		228F7F6203F2FA93D5A50BAE /* Pods_Flutterasia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C7A1FB1E837D395EA9069C /* Pods_Flutterasia.framework */; };
 		29035CE71F64D3D700C96611 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29035CE61F64D3D700C96611 /* GoogleService-Info.plist */; };
 		292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A52CF1F44929500D8DE7C /* RegisterController.swift */; };
+		294424A11F6585F300E23086 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294424A01F6585F300E23086 /* Menu.storyboard */; };
+		294424A41F65948F00E23086 /* OtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294424A31F65948F00E23086 /* OtherController.swift */; };
 		2984BC861F5A85BF0046118F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2984BC851F5A85BF0046118F /* Util.swift */; };
 		29D622CC1F444BF500CC512B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D622CB1F444BF500CC512B /* AppDelegate.swift */; };
-		29D622CE1F444BF500CC512B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D622CD1F444BF500CC512B /* ViewController.swift */; };
-		29D622D11F444BF500CC512B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29D622CF1F444BF500CC512B /* Main.storyboard */; };
+		29D622CE1F444BF500CC512B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D622CD1F444BF500CC512B /* HomeController.swift */; };
 		29D622D31F444BF500CC512B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29D622D21F444BF500CC512B /* Assets.xcassets */; };
-		29E00AE61F46DAA7009710DC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E00AE51F46DAA7009710DC /* MenuViewController.swift */; };
-		29E00AE81F46DAD7009710DC /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E00AE71F46DAD7009710DC /* MenuStoryboard.storyboard */; };
-		29F491FB1F4FBF7D00343791 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29F491FA1F4FBF7D00343791 /* Login.storyboard */; };
+		29F491FB1F4FBF7D00343791 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29F491FA1F4FBF7D00343791 /* Main.storyboard */; };
 		29F491FD1F4FC4D700343791 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F491FC1F4FC4D700343791 /* LoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		29035CE61F64D3D700C96611 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		292A52CF1F44929500D8DE7C /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		294424A01F6585F300E23086 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
+		294424A31F65948F00E23086 /* OtherController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherController.swift; sourceTree = "<group>"; };
 		2984BC851F5A85BF0046118F /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ../Util.swift; sourceTree = "<group>"; };
 		29D622C81F444BF500CC512B /* Flutterasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flutterasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29D622CB1F444BF500CC512B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		29D622CD1F444BF500CC512B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		29D622D01F444BF500CC512B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		29D622CD1F444BF500CC512B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		29D622D21F444BF500CC512B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29D622D71F444BF500CC512B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		29E00AE51F46DAA7009710DC /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		29E00AE71F46DAD7009710DC /* MenuStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuStoryboard.storyboard; sourceTree = "<group>"; };
-		29F491FA1F4FBF7D00343791 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		29F491FA1F4FBF7D00343791 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		29F491FC1F4FC4D700343791 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3D2AA5771496F79A539FE359 /* Pods-Flutterasia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flutterasia.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flutterasia/Pods-Flutterasia.release.xcconfig"; sourceTree = "<group>"; };
 		60C7A1FB1E837D395EA9069C /* Pods_Flutterasia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flutterasia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +50,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		294424A21F658F6600E23086 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				294424A31F65948F00E23086 /* OtherController.swift */,
+				29D622CD1F444BF500CC512B /* HomeController.swift */,
+				294424A01F6585F300E23086 /* Menu.storyboard */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
 		2984BC871F5A85CE0046118F /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -63,7 +71,7 @@
 		29A676C81F4684DE00BE4858 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				29F491FA1F4FBF7D00343791 /* Login.storyboard */,
+				29F491FA1F4FBF7D00343791 /* Main.storyboard */,
 				29F491FC1F4FC4D700343791 /* LoginController.swift */,
 				292A52CF1F44929500D8DE7C /* RegisterController.swift */,
 			);
@@ -94,23 +102,12 @@
 				29035CE61F64D3D700C96611 /* GoogleService-Info.plist */,
 				29D622D71F444BF500CC512B /* Info.plist */,
 				29D622CB1F444BF500CC512B /* AppDelegate.swift */,
-				29D622CD1F444BF500CC512B /* ViewController.swift */,
 				29D622D21F444BF500CC512B /* Assets.xcassets */,
 				29A676C81F4684DE00BE4858 /* Login */,
-				29D622CF1F444BF500CC512B /* Main.storyboard */,
-				29E00AE41F46DA35009710DC /* Menu */,
+				294424A21F658F6600E23086 /* Menu */,
 				2984BC871F5A85CE0046118F /* Util */,
 			);
 			path = Flutterasia;
-			sourceTree = "<group>";
-		};
-		29E00AE41F46DA35009710DC /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				29E00AE51F46DAA7009710DC /* MenuViewController.swift */,
-				29E00AE71F46DAD7009710DC /* MenuStoryboard.storyboard */,
-			);
-			name = Menu;
 			sourceTree = "<group>";
 		};
 		91CDF5B79CDEFCDB54238711 /* Frameworks */ = {
@@ -194,9 +191,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				29D622D31F444BF500CC512B /* Assets.xcassets in Resources */,
-				29D622D11F444BF500CC512B /* Main.storyboard in Resources */,
-				29E00AE81F46DAD7009710DC /* MenuStoryboard.storyboard in Resources */,
-				29F491FB1F4FBF7D00343791 /* Login.storyboard in Resources */,
+				294424A11F6585F300E23086 /* Menu.storyboard in Resources */,
+				29F491FB1F4FBF7D00343791 /* Main.storyboard in Resources */,
 				29035CE71F64D3D700C96611 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,26 +263,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */,
+				294424A41F65948F00E23086 /* OtherController.swift in Sources */,
 				2984BC861F5A85BF0046118F /* Util.swift in Sources */,
-				29D622CE1F444BF500CC512B /* ViewController.swift in Sources */,
+				29D622CE1F444BF500CC512B /* HomeController.swift in Sources */,
 				29D622CC1F444BF500CC512B /* AppDelegate.swift in Sources */,
-				29E00AE61F46DAA7009710DC /* MenuViewController.swift in Sources */,
 				29F491FD1F4FC4D700343791 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		29D622CF1F444BF500CC512B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				29D622D01F444BF500CC512B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		29D622D81F444BF500CC512B /* Debug */ = {
