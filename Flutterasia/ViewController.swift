@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ViewController: UIViewController {
+    @IBOutlet weak var welcomeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let user = Auth.auth().currentUser
+        let displayName = user?.displayName
+        
+        if user != nil {
+            welcomeLabel.text = "Welcome \(displayName!)"
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,18 +31,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
-        UserDefaults.standard.set(false, forKey: "isUserLogin")
+        // Firebase logout
+        let firebaseAuth = Auth.auth()
         
-        // Set to login page
-        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
-        let loginController = loginStoryboard.instantiateViewController(withIdentifier: "LoginController") as! LoginController
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: loginController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
-            appDelegate.window?.rootViewController = loginController
-            appDelegate.window?.makeKeyAndVisible()
+        do {
+            try firebaseAuth.signOut()
+            
+            // Set to login page
+            let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+            let loginController = loginStoryboard.instantiateViewController(withIdentifier: "LoginController") as! LoginController
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: loginController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
+                appDelegate.window?.rootViewController = loginController
+                appDelegate.window?.makeKeyAndVisible()
+            }
+        } catch let signOutError as NSError {
+            self.displayAlertMessage(message: signOutError.localizedDescription)
         }
-        
 //        self.performSegue(withIdentifier: "loginView", sender: self)
     }
     
