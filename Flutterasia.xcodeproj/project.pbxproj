@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		228F7F6203F2FA93D5A50BAE /* Pods_Flutterasia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C7A1FB1E837D395EA9069C /* Pods_Flutterasia.framework */; };
+		29035CE71F64D3D700C96611 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29035CE61F64D3D700C96611 /* GoogleService-Info.plist */; };
 		292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A52CF1F44929500D8DE7C /* RegisterController.swift */; };
 		2984BC861F5A85BF0046118F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2984BC851F5A85BF0046118F /* Util.swift */; };
 		29D622CC1F444BF500CC512B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D622CB1F444BF500CC512B /* AppDelegate.swift */; };
@@ -20,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29035CE61F64D3D700C96611 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		292A52CF1F44929500D8DE7C /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		2984BC851F5A85BF0046118F /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ../Util.swift; sourceTree = "<group>"; };
 		29D622C81F444BF500CC512B /* Flutterasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flutterasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +35,9 @@
 		29E00AE71F46DAD7009710DC /* MenuStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuStoryboard.storyboard; sourceTree = "<group>"; };
 		29F491FA1F4FBF7D00343791 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		29F491FC1F4FC4D700343791 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		3D2AA5771496F79A539FE359 /* Pods-Flutterasia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flutterasia.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flutterasia/Pods-Flutterasia.release.xcconfig"; sourceTree = "<group>"; };
+		60C7A1FB1E837D395EA9069C /* Pods_Flutterasia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flutterasia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5261793CFA8D3224D13EEB3 /* Pods-Flutterasia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flutterasia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flutterasia/Pods-Flutterasia.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228F7F6203F2FA93D5A50BAE /* Pods_Flutterasia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +75,8 @@
 			children = (
 				29D622CA1F444BF500CC512B /* Flutterasia */,
 				29D622C91F444BF500CC512B /* Products */,
+				951C699AE62E0C903709C939 /* Pods */,
+				91CDF5B79CDEFCDB54238711 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,6 +91,7 @@
 		29D622CA1F444BF500CC512B /* Flutterasia */ = {
 			isa = PBXGroup;
 			children = (
+				29035CE61F64D3D700C96611 /* GoogleService-Info.plist */,
 				29D622D71F444BF500CC512B /* Info.plist */,
 				29D622CB1F444BF500CC512B /* AppDelegate.swift */,
 				29D622CD1F444BF500CC512B /* ViewController.swift */,
@@ -103,6 +113,23 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		91CDF5B79CDEFCDB54238711 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				60C7A1FB1E837D395EA9069C /* Pods_Flutterasia.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		951C699AE62E0C903709C939 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C5261793CFA8D3224D13EEB3 /* Pods-Flutterasia.debug.xcconfig */,
+				3D2AA5771496F79A539FE359 /* Pods-Flutterasia.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,9 +137,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29D622DA1F444BF500CC512B /* Build configuration list for PBXNativeTarget "Flutterasia" */;
 			buildPhases = (
+				2555B79A193E81144E7C2D6E /* [CP] Check Pods Manifest.lock */,
 				29D622C41F444BF500CC512B /* Sources */,
 				29D622C51F444BF500CC512B /* Frameworks */,
 				29D622C61F444BF500CC512B /* Resources */,
+				79EBAF5056BDE177F6A74EAD /* [CP] Embed Pods Frameworks */,
+				0F9691D749A085F103B1A684 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,10 +197,69 @@
 				29D622D11F444BF500CC512B /* Main.storyboard in Resources */,
 				29E00AE81F46DAD7009710DC /* MenuStoryboard.storyboard in Resources */,
 				29F491FB1F4FBF7D00343791 /* Login.storyboard in Resources */,
+				29035CE71F64D3D700C96611 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F9691D749A085F103B1A684 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flutterasia/Pods-Flutterasia-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2555B79A193E81144E7C2D6E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Flutterasia-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79EBAF5056BDE177F6A74EAD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Flutterasia/Pods-Flutterasia-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flutterasia/Pods-Flutterasia-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		29D622C41F444BF500CC512B /* Sources */ = {
@@ -295,6 +384,7 @@
 		};
 		29D622DB1F444BF500CC512B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5261793CFA8D3224D13EEB3 /* Pods-Flutterasia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -302,7 +392,7 @@
 				INFOPLIST_FILE = Flutterasia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dataon.Flutterasia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imron.flutterasia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -312,6 +402,7 @@
 		};
 		29D622DC1F444BF500CC512B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D2AA5771496F79A539FE359 /* Pods-Flutterasia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -319,7 +410,7 @@
 				INFOPLIST_FILE = Flutterasia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dataon.Flutterasia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imron.flutterasia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
