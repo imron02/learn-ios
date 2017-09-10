@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nl0-2d-Je6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--View Controller-->
         <scene sceneID="GCZ-rw-84h">
             <objects>
                 <viewController id="G6q-kQ-tG5" sceneMemberID="viewController">
@@ -22,16 +22,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="pkl-wO-FU7"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="oZo-gf-gFm"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RH7-h7-Hvw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="998" y="564"/>
         </scene>
-        <!--Item 1-->
+        <!--Home Controller-->
         <scene sceneID="3kD-oq-d2q">
             <objects>
-                <viewController id="r9H-WZ-OLf" sceneMemberID="viewController">
+                <viewController id="r9H-WZ-OLf" customClass="HomeController" customModule="Flutterasia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w7u-vW-QQi"/>
                         <viewControllerLayoutGuide type="bottom" id="FZK-22-NId"/>
@@ -39,18 +39,38 @@
                     <view key="view" contentMode="scaleToFill" id="3rG-qf-KpX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVv-qb-9nB">
+                                <rect key="frame" x="16" y="77" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbR-KV-TwW">
+                                <rect key="frame" x="136" y="299" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonTapped:" destination="r9H-WZ-OLf" eventType="touchUpInside" id="Jwo-NG-ExC"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="mky-xU-t12"/>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="mky-xU-t12"/>
+                    <connections>
+                        <outlet property="welcomeLabel" destination="cVv-qb-9nB" id="z3p-Ff-f7X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QKS-Mn-h1j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="-100"/>
+            <point key="canvasLocation" x="997.5" y="-100.35211267605634"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gxg-Hw-2v1">
             <objects>
-                <tabBarController storyboardIdentifier="MenuStoryboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nl0-2d-Je6" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MenuTabbar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nl0-2d-Je6" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="1OC-iP-eMR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
