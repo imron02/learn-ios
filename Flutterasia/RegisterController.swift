@@ -92,7 +92,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         
         let btnAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (action) in
             // Set to main page
-            let tabBarStoryboard = UIStoryboard(name: "MenuTabbar", bundle: nil)
+            let tabBarStoryboard = UIStoryboard(name: "Menu", bundle: nil)
             let tabBarController = tabBarStoryboard.instantiateViewController(withIdentifier: "MenuTabbar") as! UITabBarController
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
