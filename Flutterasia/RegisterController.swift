@@ -87,7 +87,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    override func displaySuccessMessage(message: String) {
+    func displaySuccessMessage(message: String) {
         let alertMessage = UIAlertController(title: "Success", message: message, preferredStyle: UIAlertControllerStyle.alert)
         
         let btnAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (action) in
@@ -106,7 +106,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         self.present(alertMessage, animated: true, completion: nil)
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
