@@ -18,15 +18,4 @@ extension UIViewController {
         
         self.present(alertMessage, animated: true, completion: nil)
     }
-    
-    func displaySuccessMessage(message: String) -> Void {
-        let alertMessage = UIAlertController(title: "Success", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let btnAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (action) in
-            self.performSegue(withIdentifier: "backToLoginView", sender: self)
-        }
-        
-        alertMessage.addAction(btnAction)
-        self.present(alertMessage, animated: true, completion: nil)
-    }
 }
