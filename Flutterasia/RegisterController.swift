@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Firebase
 
 class RegisterController: UIViewController, UITextFieldDelegate {
 
@@ -18,32 +18,35 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var retypePasswordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var ref: DatabaseReference = Database.database().reference()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Scroll view hide keyboar
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterController.dismissKeyboard))
-        scrollView.addGestureRecognizer(tap)
-        
-        // Move up content on keyboard show
-        scrollView.contentSize = CGSize(width: 400, height: 2300)
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
-        
-        // Delegate text field
-        textFieldDelegate()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.scrollViewTapGesture()
+        self.eventOnKeyboardShow()
+        self.textFieldDelegate()
     }
     
     func textFieldDelegate() -> Void {
+        // Delegate text field
         self.fullNameTextField.delegate = self
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.retypePasswordTextField.delegate = self
+    }
+    
+    func scrollViewTapGesture() -> Void {
+        // Scroll view hide keyboard
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterController.dismissKeyboard))
+        scrollView.addGestureRecognizer(tap)
+    }
+    
+    func eventOnKeyboardShow() -> Void {
+        // Move up content on keyboard show
+        scrollView.contentSize = CGSize(width: 400, height: 2300)
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
     
     @IBAction func registerButtonTapped(_ sender: Any) {
@@ -66,24 +69,51 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         }
         
         // Store data
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+        let authData: [String: String] = [
+            "fullName": fullName,
+            "email": email,
+            "phone": phone,
+            "password": password
+        ];
+        self.storeAuthData(data: authData)
+    }
+    
+    func storeAuthData(data: [String: String]) -> Void {
+        print(data)
+        Auth.auth().createUser(withEmail: data["email"]!, password: data["password"]!) { (user, error) in
             if let firebaseError = error {
+                print(firebaseError)
                 self.displayAlertMessage(message: firebaseError.localizedDescription)
                 return
             }
             
-            // Update data
-            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-            changeRequest?.displayName = fullName
-            changeRequest?.photoURL = URL(string: "https://lh6.googleusercontent.com/-n7gzvVydeS8/AAAAAAAAAAI/AAAAAAAAAZs/R6peU2B6R6o/photo.jpg?sz=64")
-            changeRequest?.commitChanges(completion: { (error) in
-                if let changeReqError = error {
-                    print(changeReqError.localizedDescription)
-                    return
-                }
+            // Get the currently signed-in user
+            let user = Auth.auth().currentUser
+            if let user = user {
+                // Remove password value
+                var users = data
+                users.removeValue(forKey: "password")
                 
-                self.displaySuccessMessage(message: "Registration is successful")
-            })
+                self.ref.child("users").child(user.uid).setValue(users, withCompletionBlock: { (error, ref) in
+                    if let changeReqError = error {
+                        self.displayAlertMessage(message: changeReqError.localizedDescription)
+                        return
+                    }
+                })
+                
+                // Update data
+                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = data["fullName"]
+                changeRequest?.commitChanges(completion: { (error) in
+                    if let changeReqError = error {
+                        self.displayAlertMessage(message: changeReqError.localizedDescription)
+                        return
+                    }
+    
+                    self.displaySuccessMessage(message: "Registration is successful")
+                })
+            }
+            
         }
     }
     
