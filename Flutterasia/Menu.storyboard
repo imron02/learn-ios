@@ -9,10 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Profile Controller-->
+        <!--Profile-->
         <scene sceneID="unN-6x-fKm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hQf-bY-wQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="aL3-oM-0nn" customClass="ProfileController" customModule="Flutterasia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="dK7-TL-Iqv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -85,7 +84,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Edit"/>
                                                     <connections>
-                                                        <segue destination="2Rs-As-0X2" kind="show" id="J41-zH-yzl"/>
+                                                        <segue destination="xp3-pt-BMk" kind="show" identifier="profileDetail" id="DzR-gC-mSa"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -99,32 +98,23 @@
                             <outlet property="delegate" destination="aL3-oM-0nn" id="ID4-sj-aIl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="EDH-MR-fc4"/>
+                    <navigationItem key="navigationItem" title="Profile" largeTitleDisplayMode="never" id="EDH-MR-fc4"/>
                     <connections>
                         <outlet property="displayNameCell" destination="Bsj-aT-64U" id="KOi-0A-4V4"/>
                         <outlet property="emailCell" destination="jjT-Rg-bhv" id="Dp3-ed-Zpy"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hQf-bY-wQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1907" y="610"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="glt-xp-9c9">
+        <!--ProfileDetail-->
+        <scene sceneID="DLe-Mn-Fwj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tti-WV-r65" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="2Rs-As-0X2" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Zq5-kA-2sp"/>
-                        <viewControllerLayoutGuide type="bottom" id="8SD-7l-odA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BSa-qS-9Ur">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
+                <viewControllerPlaceholder storyboardName="ProfileDetail" id="xp3-pt-BMk" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iNT-nq-OFy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2801" y="610"/>
+            <point key="canvasLocation" x="2538" y="610"/>
         </scene>
         <!--Find Love-->
         <scene sceneID="3kD-oq-d2q">

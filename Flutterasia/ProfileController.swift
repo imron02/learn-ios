@@ -20,14 +20,6 @@ class ProfileController: UITableViewController {
         self.getUser()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
     func getUser() -> Void {
         let user = Auth.auth().currentUser
         
