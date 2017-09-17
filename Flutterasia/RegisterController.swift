@@ -146,12 +146,11 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardWillBeShown(notification: NSNotification) {
-        let userInfo = notification.userInfo!
-        var keyboardFrame: CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        var keyboardFrame: CGRect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         var contentInset: UIEdgeInsets = self.scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height + 20
+        contentInset.bottom = keyboardFrame.size.height + 40
         scrollView.contentInset = contentInset
     }
     
