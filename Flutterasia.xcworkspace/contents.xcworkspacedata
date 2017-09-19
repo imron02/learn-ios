@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Flutterasia/MenuViewController.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Flutterasia/MenuStoryboard.storyboard">
-   </FileRef>
-   <FileRef
       location = "group:Flutterasia.xcodeproj">
    </FileRef>
    <FileRef
