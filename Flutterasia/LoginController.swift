@@ -22,6 +22,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         // Textfield delegate
         textFieldDelegate()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
