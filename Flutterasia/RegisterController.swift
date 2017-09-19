@@ -28,6 +28,10 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         self.textFieldDelegate()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func textFieldDelegate() -> Void {
         // Delegate text field
         self.fullNameTextField.delegate = self
@@ -150,7 +154,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         var contentInset: UIEdgeInsets = self.scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height + 40
+        contentInset.bottom = keyboardFrame.size.height + 35
         scrollView.contentInset = contentInset
     }
     
