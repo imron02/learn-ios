@@ -12,6 +12,7 @@
 		292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A52CF1F44929500D8DE7C /* RegisterController.swift */; };
 		294424A11F6585F300E23086 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294424A01F6585F300E23086 /* Menu.storyboard */; };
 		294424A41F65948F00E23086 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294424A31F65948F00E23086 /* ProfileController.swift */; };
+		295F43921F7171E2005281F5 /* PicturePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295F43911F7171E2005281F5 /* PicturePicker.swift */; };
 		2984BC861F5A85BF0046118F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2984BC851F5A85BF0046118F /* Util.swift */; };
 		29D622CC1F444BF500CC512B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D622CB1F444BF500CC512B /* AppDelegate.swift */; };
 		29D622CE1F444BF500CC512B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D622CD1F444BF500CC512B /* HomeController.swift */; };
@@ -27,6 +28,7 @@
 		292A52CF1F44929500D8DE7C /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		294424A01F6585F300E23086 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		294424A31F65948F00E23086 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		295F43911F7171E2005281F5 /* PicturePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturePicker.swift; sourceTree = "<group>"; };
 		2984BC851F5A85BF0046118F /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ../Util.swift; sourceTree = "<group>"; };
 		29D622C81F444BF500CC512B /* Flutterasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flutterasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29D622CB1F444BF500CC512B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				29F491FA1F4FBF7D00343791 /* Main.storyboard */,
 				29F491FC1F4FC4D700343791 /* LoginController.swift */,
 				292A52CF1F44929500D8DE7C /* RegisterController.swift */,
+				295F43911F7171E2005281F5 /* PicturePicker.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				295F43921F7171E2005281F5 /* PicturePicker.swift in Sources */,
 				292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */,
 				294424A41F65948F00E23086 /* ProfileController.swift in Sources */,
 				2984BC861F5A85BF0046118F /* Util.swift in Sources */,
