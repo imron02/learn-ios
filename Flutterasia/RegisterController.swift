@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class RegisterController: UIViewController, UITextFieldDelegate {
 
@@ -17,8 +18,11 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var retypePasswordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var profileImageView: UIImageView!
     
     var ref: DatabaseReference = Database.database().reference()
+    var changeImage: Bool = false
+    var imageURL: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         self.scrollViewTapGesture()
         self.eventOnKeyboardShow()
         self.textFieldDelegate()
+        self.profileImageTapGesture()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -44,6 +49,12 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         // Scroll view hide keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterController.dismissKeyboard))
         scrollView.addGestureRecognizer(tap)
+    }
+    
+    func profileImageTapGesture() -> Void {
+        profileImageView.isUserInteractionEnabled = true
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openGallery))
+         profileImageView.addGestureRecognizer(tap)
     }
     
     func eventOnKeyboardShow() -> Void {
@@ -65,13 +76,19 @@ class RegisterController: UIViewController, UITextFieldDelegate {
             displayAlertMessage(message: "All field are required.")
             return
         }
-        
+
         // Check password and repeat password is same
         if password != retypePassword {
             displayAlertMessage(message: "Password do not match")
             return
         }
         
+        // Check for change image
+        if !changeImage {
+            displayAlertMessage(message: "Please upload image")
+            return
+        }
+
         // Store data
         let authData: [String: String] = [
             "fullName": fullName,
@@ -83,10 +100,8 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     func storeAuthData(data: [String: String]) -> Void {
-        print(data)
         Auth.auth().createUser(withEmail: data["email"]!, password: data["password"]!) { (user, error) in
             if let firebaseError = error {
-                print(firebaseError)
                 self.displayAlertMessage(message: firebaseError.localizedDescription)
                 return
             }
@@ -94,31 +109,73 @@ class RegisterController: UIViewController, UITextFieldDelegate {
             // Get the currently signed-in user
             let user = Auth.auth().currentUser
             if let user = user {
+                let uid = user.uid
+                
                 // Remove password value
-                var users = data
-                users.removeValue(forKey: "password")
+                var newData = data
+                newData.removeValue(forKey: "password")
                 
-                self.ref.child("users").child(user.uid).setValue(users, withCompletionBlock: { (error, ref) in
-                    if let changeReqError = error {
-                        self.displayAlertMessage(message: changeReqError.localizedDescription)
+                // Store profile picture
+                self.storeImage(completion: { (result, error) in
+                    if error != nil {
+                        self.displayAlertMessage(message: error!)
                         return
                     }
-                })
-                
-                // Update data
-                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-                changeRequest?.displayName = data["fullName"]
-                changeRequest?.commitChanges(completion: { (error) in
-                    if let changeReqError = error {
-                        self.displayAlertMessage(message: changeReqError.localizedDescription)
-                        return
-                    }
-    
-                    self.displaySuccessMessage(message: "Registration is successful")
+                    
+                    newData["profileImageUrl"] = self.imageURL
+                    self.createUserDB(uid: uid, data: newData)
                 })
             }
             
         }
+    }
+    
+    func storeImage(completion: @escaping (Bool, String?) -> Void) -> Void {
+        let storageRef = Storage.storage().reference()
+        let imageName = NSUUID().uuidString
+        let imageRef = storageRef.child("profileImages/\(imageName).png")
+        
+        if let uploadImage = UIImagePNGRepresentation(profileImageView.image!) {
+            imageRef.putData(uploadImage, metadata: nil, completion: { (metadata, error) in
+                if let firebaseError = error {
+                    print(firebaseError.localizedDescription)
+                    
+                    completion(false, "Failed upload image.")
+                    
+                    // Sign out user
+                    do {
+                        try Auth.auth().signOut()
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
+                    return
+                }
+                
+                self.imageURL = metadata!.downloadURL()!.absoluteString
+                completion(true, nil)
+            })
+        }
+    }
+    
+    func createUserDB(uid: String, data: [String: String]) -> Void {
+        self.ref.child("users").child(uid).setValue(data, withCompletionBlock: { (error, ref) in
+            if let changeReqError = error {
+                self.displayAlertMessage(message: changeReqError.localizedDescription)
+                return
+            }
+        })
+        
+        // Update data
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = data["fullName"]
+        changeRequest?.commitChanges(completion: { (error) in
+            if let changeReqError = error {
+                self.displayAlertMessage(message: changeReqError.localizedDescription)
+                return
+            }
+            
+            self.displaySuccessMessage(message: "Registration is successful")
+        })
     }
     
     func displaySuccessMessage(message: String) {
@@ -161,5 +218,4 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @objc private func keyboardWillBeHide() {
         scrollView.contentOffset = .zero
     }
-
 }
