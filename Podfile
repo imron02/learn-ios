@@ -11,5 +11,6 @@ pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
+pod 'SwiftOverlays', '~> 4.0.0'
 
 end
