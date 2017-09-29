@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 
 class ProfileController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
     
     var activeTextField: UITextField = UITextField()
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,14 +33,22 @@ class ProfileController: UITableViewController, UITextFieldDelegate {
     func textFieldDelegage() -> Void {
         self.fullNameTextField.delegate = self
         self.emailTextField.delegate = self
+        self.phoneTextField.delegate = self
     }
     
     func getUser() -> Void {
+        ref = Database.database().reference()
         let user = Auth.auth().currentUser
         
         if let user = user {
-            fullNameTextField.text = user.displayName
-            emailTextField.text = user.email
+            self.ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                
+                self.fullNameTextField.text = value?["fullName"] as? String
+                self.emailTextField.text = value?["email"] as? String
+                self.phoneTextField.text = value?["phone"] as? String
+            })
         }
     }
     
