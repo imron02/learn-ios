@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import SwiftOverlays
 
 class LoginController: UIViewController, UITextFieldDelegate {
     
@@ -47,8 +48,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
             return
         }
 
+        // Enable overlays
+        SwiftOverlays.showBlockingWaitOverlay()
+        
         // Check firebase data
         Auth.auth().signIn(withEmail: userEmail!, password: userPassword!) { (user, error) in
+            // Dismiss overlays
+            SwiftOverlays.removeAllBlockingOverlays()
+
             if let firebaseError = error {
                 self.displayAlertMessage(message: firebaseError.localizedDescription)
                 print(firebaseError.localizedDescription)
@@ -65,8 +72,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 appDelegate.window?.makeKeyAndVisible()
             }
         }
-        
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

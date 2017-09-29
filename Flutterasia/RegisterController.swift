@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import SwiftOverlays
 
 class RegisterController: UIViewController, UITextFieldDelegate {
 
@@ -96,12 +97,20 @@ class RegisterController: UIViewController, UITextFieldDelegate {
             "phone": phone,
             "password": password
         ];
+        
+        // Enable overlays
+        SwiftOverlays.showBlockingWaitOverlay()
+        
+        // Store data
         self.storeAuthData(data: authData)
     }
     
     func storeAuthData(data: [String: String]) -> Void {
         Auth.auth().createUser(withEmail: data["email"]!, password: data["password"]!) { (user, error) in
             if let firebaseError = error {
+                // Dismiss overlays
+                SwiftOverlays.removeAllBlockingOverlays()
+                
                 self.displayAlertMessage(message: firebaseError.localizedDescription)
                 return
             }
@@ -118,6 +127,9 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                 // Store profile picture
                 self.storeImage(completion: { (result, error) in
                     if error != nil {
+                        // Dismiss overlays
+                        SwiftOverlays.removeAllBlockingOverlays()
+                        
                         self.displayAlertMessage(message: error!)
                         return
                     }
@@ -160,6 +172,9 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     func createUserDB(uid: String, data: [String: String]) -> Void {
         self.ref.child("users").child(uid).setValue(data, withCompletionBlock: { (error, ref) in
             if let changeReqError = error {
+                // Dismiss overlays
+                SwiftOverlays.removeAllBlockingOverlays()
+                
                 self.displayAlertMessage(message: changeReqError.localizedDescription)
                 return
             }
@@ -169,6 +184,9 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = data["fullName"]
         changeRequest?.commitChanges(completion: { (error) in
+            // Dismiss overlays
+            SwiftOverlays.removeAllBlockingOverlays()
+            
             if let changeReqError = error {
                 self.displayAlertMessage(message: changeReqError.localizedDescription)
                 return
