@@ -8,7 +8,6 @@
 
 import UIKit
 import FirebaseAuth
-import SwiftOverlays
 
 class LoginController: UIViewController, UITextFieldDelegate {
     
@@ -49,12 +48,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
 
         // Enable overlays
-        SwiftOverlays.showBlockingWaitOverlay()
+        self.showOverlay("Please wait..")
+        
         
         // Check firebase data
         Auth.auth().signIn(withEmail: userEmail!, password: userPassword!) { (user, error) in
             // Dismiss overlays
-            SwiftOverlays.removeAllBlockingOverlays()
+            self.dismissOverlay()
 
             if let firebaseError = error {
                 self.displayAlertMessage(message: firebaseError.localizedDescription)

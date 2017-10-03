@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import FirebaseStorage
-import SwiftOverlays
 
 class RegisterController: UIViewController, UITextFieldDelegate {
 
@@ -99,7 +98,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         ];
         
         // Enable overlays
-        SwiftOverlays.showBlockingWaitOverlay()
+        self.showOverlay("Please wait...")
         
         // Store data
         self.storeAuthData(data: authData)
@@ -109,7 +108,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         Auth.auth().createUser(withEmail: data["email"]!, password: data["password"]!) { (user, error) in
             if let firebaseError = error {
                 // Dismiss overlays
-                SwiftOverlays.removeAllBlockingOverlays()
+                self.dismissOverlay()
                 
                 self.displayAlertMessage(message: firebaseError.localizedDescription)
                 return
@@ -128,7 +127,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                 self.storeImage(completion: { (result, error) in
                     if error != nil {
                         // Dismiss overlays
-                        SwiftOverlays.removeAllBlockingOverlays()
+                        self.dismissOverlay()
                         
                         self.displayAlertMessage(message: error!)
                         return
@@ -173,7 +172,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         self.ref.child("users").child(uid).setValue(data, withCompletionBlock: { (error, ref) in
             if let changeReqError = error {
                 // Dismiss overlays
-                SwiftOverlays.removeAllBlockingOverlays()
+                self.dismissOverlay()
                 
                 self.displayAlertMessage(message: changeReqError.localizedDescription)
                 return
@@ -185,7 +184,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         changeRequest?.displayName = data["fullName"]
         changeRequest?.commitChanges(completion: { (error) in
             // Dismiss overlays
-            SwiftOverlays.removeAllBlockingOverlays()
+            self.dismissOverlay()
             
             if let changeReqError = error {
                 self.displayAlertMessage(message: changeReqError.localizedDescription)
