@@ -8,7 +8,6 @@ target 'Flutterasia' do
   # Pods for Flutterasia
 
 pod 'Firebase/Core'
-pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'Firebase/Firestore'
