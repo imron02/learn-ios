@@ -20,7 +20,8 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profileImageView: UIImageView!
     
-    var ref: DatabaseReference = Database.database().reference()
+    let db = Firestore.firestore()
+    
     var changeImage: Bool = false
     var imageURL: String = ""
     
@@ -169,30 +170,30 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     func createUserDB(uid: String, data: [String: String]) -> Void {
-        self.ref.child("users").child(uid).setValue(data, withCompletionBlock: { (error, ref) in
-            if let changeReqError = error {
+        db.collection("users").document(uid).setData(data) { (error) in
+            if let error = error {
                 // Dismiss overlays
                 self.dismissOverlay()
                 
-                self.displayAlertMessage(message: changeReqError.localizedDescription)
-                return
-            }
-        })
-        
-        // Update data
-        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-        changeRequest?.displayName = data["fullName"]
-        changeRequest?.commitChanges(completion: { (error) in
-            // Dismiss overlays
-            self.dismissOverlay()
-            
-            if let changeReqError = error {
-                self.displayAlertMessage(message: changeReqError.localizedDescription)
+                self.displayAlertMessage(message: error.localizedDescription)
                 return
             }
             
-            self.displaySuccessMessage(message: "Registration is successful")
-        })
+            // Update data
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = data["fullName"]
+            changeRequest?.commitChanges(completion: { (error) in
+                // Dismiss overlays
+                self.dismissOverlay()
+                
+                if let changeReqError = error {
+                    self.displayAlertMessage(message: changeReqError.localizedDescription)
+                    return
+                }
+                
+                self.displaySuccessMessage(message: "Registration is successful")
+            })
+        }
     }
     
     func displaySuccessMessage(message: String) {

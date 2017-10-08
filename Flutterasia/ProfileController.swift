@@ -18,7 +18,6 @@ class ProfileController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var profileImageView: UIImageView!
     
     var activeTextField: UITextField = UITextField()
-    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,19 +46,23 @@ class ProfileController: UITableViewController, UITextFieldDelegate {
     }
     
     func getUser() -> Void {
-        ref = Database.database().reference()
+        let db = Firestore.firestore()
         let user = Auth.auth().currentUser
         
         if let user = user {
-            self.ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                let value = snapshot.value as? NSDictionary
+            db.collection("users").document(user.uid).getDocument(completion: { (docSnaphot, error) in
+                if let error = error {
+                    self.displayAlertMessage(message: error.localizedDescription)
+                    return
+                }
+                
+                let value = docSnaphot?.data()
                 
                 self.fullNameTextField.text = value?["fullName"] as? String
                 self.emailTextField.text = value?["email"] as? String
                 self.phoneTextField.text = value?["phone"] as? String
                 
-                self.profileImageView.loadProfileImageCache(urlString: value?["profileImageUrl"] as! String)
+                self.profileImageView.loadProfileImageCache(urlString: (value?["profileImageUrl"] as! String))
             })
         }
     }
