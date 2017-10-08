@@ -1,6 +1,0 @@
-framework module Pods_Flutterasia {
-  umbrella header "Pods-Flutterasia-umbrella.h"
-
-  export *
-  module * { export * }
-}
