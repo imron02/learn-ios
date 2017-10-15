@@ -8,11 +8,23 @@
 
 import UIKit
 
+let picker = UIImagePickerController()
+
 extension RegisterController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    
     @objc func openGallery() -> Void {
-        let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
+        
+        present(picker, animated: true, completion: nil)
+    }
+    
+    @objc func openCamera() -> Void {
+        picker.delegate = self
+        picker.sourceType = .camera
+        picker.allowsEditing = true
+        picker.showsCameraControls = true
         
         present(picker, animated: true, completion: nil)
     }
