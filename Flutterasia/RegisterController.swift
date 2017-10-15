@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseStorage
 
 class RegisterController: UIViewController, UITextFieldDelegate {
 
@@ -20,7 +19,8 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profileImageView: UIImageView!
     
-    let db = Firestore.firestore()
+    private var registerViewModel = RegisterViewModel()
+    private var user = User()
     
     var changeImage: Bool = false
     var imageURL: String = ""
@@ -54,8 +54,30 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     
     func profileImageTapGesture() -> Void {
         profileImageView.isUserInteractionEnabled = true
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openGallery))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseSourcePicture))
          profileImageView.addGestureRecognizer(tap)
+    }
+    
+    @objc func chooseSourcePicture() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cameraButton = UIAlertAction(title: "Take Photo", style: .default) { (action) in
+            self.openCamera()
+        }
+        
+        let galleryButton = UIAlertAction(title: "Choose Photo", style: .default) { (action) in
+            self.openGallery()
+        }
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            print("Cancel")
+        }
+        
+        alertController.addAction(cameraButton)
+        alertController.addAction(galleryButton)
+        alertController.addAction(cancelButton)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func eventOnKeyboardShow() -> Void {
@@ -66,20 +88,20 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func registerButtonTapped(_ sender: Any) {
-        let fullName = fullNameTextField.text!
-        let email = emailTextField.text!
-        let phone = phoneTextField.text!
-        let password = passwordTextField.text!
+        user.fullName = fullNameTextField.text!
+        user.email = emailTextField.text!
+        user.phone = phoneTextField.text!
+        user.password = passwordTextField.text!
         let retypePassword = retypePasswordTextField.text!
         
         // Check empty field
-        if fullName.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty || retypePassword.isEmpty {
+        if user.fullName!.isEmpty || user.email!.isEmpty || user.phone!.isEmpty || user.password!.isEmpty || retypePassword.isEmpty {
             displayAlertMessage(message: "All field are required.")
             return
         }
 
         // Check password and repeat password is same
-        if password != retypePassword {
+        if user.password != retypePassword {
             displayAlertMessage(message: "Password do not match")
             return
         }
@@ -89,110 +111,60 @@ class RegisterController: UIViewController, UITextFieldDelegate {
             displayAlertMessage(message: "Please upload image")
             return
         }
-
-        // Store data
-        let authData: [String: String] = [
-            "fullName": fullName,
-            "email": email,
-            "phone": phone,
-            "password": password
-        ];
         
         // Enable overlays
         self.showOverlay("Please wait...")
         
         // Store data
-        self.storeAuthData(data: authData)
+        self.storeAuthData(data: user)
     }
     
-    func storeAuthData(data: [String: String]) -> Void {
-        Auth.auth().createUser(withEmail: data["email"]!, password: data["password"]!) { (user, error) in
-            if let firebaseError = error {
+    func storeAuthData(data: User) -> Void {
+        registerViewModel.createUser(data: data) { (success, result) in
+            if !success {
                 // Dismiss overlays
                 self.dismissOverlay()
-                
-                self.displayAlertMessage(message: firebaseError.localizedDescription)
+
+                self.displayAlertMessage(message: result!)
                 return
             }
             
-            // Get the currently signed-in user
-            let user = Auth.auth().currentUser
-            if let user = user {
-                let uid = user.uid
-                
-                // Remove password value
-                var newData = data
-                newData.removeValue(forKey: "password")
-                
-                // Store profile picture
-                self.storeImage(completion: { (result, error) in
-                    if error != nil {
-                        // Dismiss overlays
-                        self.dismissOverlay()
-                        
-                        self.displayAlertMessage(message: error!)
-                        return
-                    }
+            let profileImage = self.profileImageView.image!
+            self.registerViewModel.storeImage(image: profileImage, completion: { (success, result) in
+                if !success {
+                    // Dismiss overlays
+                    self.dismissOverlay()
                     
-                    newData["profileImageUrl"] = self.imageURL
-                    self.createUserDB(uid: uid, data: newData)
-                })
-            }
-            
+                    self.displayAlertMessage(message: result!)
+                    return
+                }
+                
+                let profileImageURL = result
+                
+                let newData: [String: String] = [
+                    "fullName": self.user.fullName!,
+                    "email": self.user.email!,
+                    "phone": self.user.phone!,
+                    "profileImageUrl": profileImageURL!
+                ]
+                
+                self.createUserDB(data: newData)
+            })
         }
     }
     
-    func storeImage(completion: @escaping (Bool, String?) -> Void) -> Void {
-        let storageRef = Storage.storage().reference()
-        let imageName = NSUUID().uuidString
-        let imageRef = storageRef.child("profileImages/\(imageName).png")
+    func createUserDB(data: [String: String]) -> Void {
+        let firUser = Auth.auth().currentUser!
         
-        if let uploadImage = UIImagePNGRepresentation(profileImageView.image!) {
-            imageRef.putData(uploadImage, metadata: nil, completion: { (metadata, error) in
-                if let firebaseError = error {
-                    print(firebaseError.localizedDescription)
-                    
-                    completion(false, "Failed upload image.")
-                    
-                    // Sign out user
-                    do {
-                        try Auth.auth().signOut()
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
-                    }
-                    return
-                }
-                
-                self.imageURL = metadata!.downloadURL()!.absoluteString
-                completion(true, nil)
-            })
-        }
-    }
-    
-    func createUserDB(uid: String, data: [String: String]) -> Void {
-        db.collection("users").document(uid).setData(data) { (error) in
-            if let error = error {
-                // Dismiss overlays
-                self.dismissOverlay()
-                
-                self.displayAlertMessage(message: error.localizedDescription)
-                return
+        self.registerViewModel.createUserDoc(uid: firUser.uid, data: data) { (success, result) in
+            // Dismiss overlays
+            self.dismissOverlay()
+            
+            if !success {
+                self.displayAlertMessage(message: result!)
             }
             
-            // Update data
-            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-            changeRequest?.displayName = data["fullName"]
-            changeRequest?.commitChanges(completion: { (error) in
-                // Dismiss overlays
-                self.dismissOverlay()
-                
-                if let changeReqError = error {
-                    self.displayAlertMessage(message: changeReqError.localizedDescription)
-                    return
-                }
-                
-                self.displaySuccessMessage(message: "Registration is successful")
-            })
+            self.displaySuccessMessage(message: result!)
         }
     }
     
