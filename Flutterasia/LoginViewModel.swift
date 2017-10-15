@@ -32,7 +32,7 @@ class LoginViewModel {
     func login(email: String, password: String, completion: @escaping CompletionHandler) -> Void {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if let firebaseError = error {
-                completion(true, firebaseError.localizedDescription)
+                completion(false, firebaseError.localizedDescription)
                 return
             }
 
