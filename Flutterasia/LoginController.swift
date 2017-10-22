@@ -35,6 +35,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
     func textFieldDelegate() -> Void {
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
