@@ -39,6 +39,10 @@ extension RegisterController: UIImagePickerControllerDelegate, UINavigationContr
         }
         
         if let selectedImage = selectedImageFromPicker {
+            // Hide add photo label
+            self.addPhotoLabel.isHidden = true
+            
+            // Change image
             changeImage = true
             profileImageView.image = selectedImage
         }
