@@ -18,6 +18,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var retypePasswordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var addPhotoLabel: UILabel!
     
     private var registerViewModel = RegisterViewModel()
     private var user = User()
@@ -28,14 +29,19 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.scrollViewTapGesture()
-        self.eventOnKeyboardShow()
-        self.textFieldDelegate()
-        self.profileImageTapGesture()
+        scrollViewTapGesture()
+        eventOnKeyboardShow()
+        textFieldDelegate()
+        profileImageTapGesture()
+        textFieldProperties()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     func textFieldDelegate() -> Void {
@@ -44,6 +50,38 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.retypePasswordTextField.delegate = self
+    }
+    
+    func textFieldProperties() -> Void {
+        let borderWidth = CGFloat(1.0)
+        let borderColor = UIColor(red: 73, green: 73, blue: 73, alpha: 1).cgColor
+        let cornerRadius = CGFloat(10.0)
+        
+        // Set property
+        fullNameTextField.layer.borderWidth = borderWidth
+        fullNameTextField.layer.borderColor = borderColor
+        fullNameTextField.layer.cornerRadius = cornerRadius
+        
+        emailTextField.layer.borderWidth = borderWidth
+        emailTextField.layer.borderColor = borderColor
+        emailTextField.layer.cornerRadius = cornerRadius
+        
+        phoneTextField.layer.borderWidth = borderWidth
+        phoneTextField.layer.borderColor = borderColor
+        phoneTextField.layer.cornerRadius = cornerRadius
+        
+        passwordTextField.layer.borderWidth = borderWidth
+        passwordTextField.layer.borderColor = borderColor
+        passwordTextField.layer.cornerRadius = cornerRadius
+        
+        retypePasswordTextField.layer.borderWidth = borderWidth
+        retypePasswordTextField.layer.borderColor = borderColor
+        retypePasswordTextField.layer.cornerRadius = cornerRadius
+        
+        profileImageView.layer.borderWidth = borderWidth
+        profileImageView.layer.borderColor = borderColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        profileImageView.clipsToBounds = true
     }
     
     func scrollViewTapGesture() -> Void {
