@@ -12,6 +12,7 @@
 		292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A52CF1F44929500D8DE7C /* RegisterController.swift */; };
 		294424A11F6585F300E23086 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294424A01F6585F300E23086 /* Menu.storyboard */; };
 		294424A41F65948F00E23086 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294424A31F65948F00E23086 /* ProfileController.swift */; };
+		295D15181FB3DC25002C6955 /* MoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295D15171FB3DC25002C6955 /* MoreController.swift */; };
 		295F43921F7171E2005281F5 /* PicturePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295F43911F7171E2005281F5 /* PicturePicker.swift */; };
 		296433141F88C68E004DEA8E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296433131F88C68E004DEA8E /* LoginViewModel.swift */; };
 		2984BC861F5A85BF0046118F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2984BC851F5A85BF0046118F /* Util.swift */; };
@@ -33,6 +34,7 @@
 		292A52CF1F44929500D8DE7C /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		294424A01F6585F300E23086 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		294424A31F65948F00E23086 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		295D15171FB3DC25002C6955 /* MoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreController.swift; sourceTree = "<group>"; };
 		295F43911F7171E2005281F5 /* PicturePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturePicker.swift; sourceTree = "<group>"; };
 		296433131F88C68E004DEA8E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		2984BC851F5A85BF0046118F /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ../Util.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				294424A31F65948F00E23086 /* ProfileController.swift */,
 				29D622CD1F444BF500CC512B /* HomeController.swift */,
 				294424A01F6585F300E23086 /* Menu.storyboard */,
+				295D15171FB3DC25002C6955 /* MoreController.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Flutterasia/Pods-Flutterasia-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -295,6 +299,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -320,6 +325,7 @@
 			files = (
 				295F43921F7171E2005281F5 /* PicturePicker.swift in Sources */,
 				29BD8BDD1F7F3E39008FB3B8 /* Overlay.swift in Sources */,
+				295D15181FB3DC25002C6955 /* MoreController.swift in Sources */,
 				292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */,
 				294424A41F65948F00E23086 /* ProfileController.swift in Sources */,
 				29D379FB1F8892E70019E108 /* ProfileImageCache.swift in Sources */,
