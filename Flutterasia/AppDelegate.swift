@@ -19,6 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        
+        // Change navigation bar color
+        let titleColor = UIColor(red: 184/255, green: 217/255, blue: 179/255, alpha: 1.0)
+        
+        UINavigationBar.appearance().barTintColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = titleColor
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: titleColor]
+        UINavigationBar.appearance().isTranslucent = false
+        
+        // Change status bar color
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         return true
     }
 
