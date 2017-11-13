@@ -15,7 +15,6 @@ class MoreController: UITableViewController {
         super.viewDidLoad()
         
         viewItem = ["Profile", "Verify", "Feedback", "Blocked List"]
-        print(viewItem)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
