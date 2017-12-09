@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		228F7F6203F2FA93D5A50BAE /* Pods_Flutterasia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C7A1FB1E837D395EA9069C /* Pods_Flutterasia.framework */; };
 		29035CE71F64D3D700C96611 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29035CE61F64D3D700C96611 /* GoogleService-Info.plist */; };
+		2922FF0E1FDB5D0E001051D1 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922FF0D1FDB5D0E001051D1 /* ProfileViewModel.swift */; };
 		292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A52CF1F44929500D8DE7C /* RegisterController.swift */; };
 		294424A11F6585F300E23086 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294424A01F6585F300E23086 /* Menu.storyboard */; };
 		294424A41F65948F00E23086 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294424A31F65948F00E23086 /* ProfileController.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		29035CE61F64D3D700C96611 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2922FF0D1FDB5D0E001051D1 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		292A52CF1F44929500D8DE7C /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		294424A01F6585F300E23086 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		294424A31F65948F00E23086 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				29D622CD1F444BF500CC512B /* HomeController.swift */,
 				294424A01F6585F300E23086 /* Menu.storyboard */,
 				295D15171FB3DC25002C6955 /* MoreController.swift */,
+				2922FF0D1FDB5D0E001051D1 /* ProfileViewModel.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				2984BC861F5A85BF0046118F /* Util.swift in Sources */,
 				29D622CE1F444BF500CC512B /* HomeController.swift in Sources */,
 				29D622CC1F444BF500CC512B /* AppDelegate.swift in Sources */,
+				2922FF0E1FDB5D0E001051D1 /* ProfileViewModel.swift in Sources */,
 				29D78A5E1F9302D000F5F5F1 /* RegisterViewModel.swift in Sources */,
 				296433141F88C68E004DEA8E /* LoginViewModel.swift in Sources */,
 				29FFEB091F6B6EB600C88DC8 /* ProfileDetailController.swift in Sources */,
