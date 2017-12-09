@@ -20,11 +20,11 @@ class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataS
     var rows = ["Full name", "Email", "Phone"]
     var userValue: [String: String]?
     
+    private var profileViewModel = ProfileViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
         self.getUser()
     }
     
@@ -38,28 +38,27 @@ class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataS
     }
 
     func getUser() -> Void {
-        let user = Auth.auth().currentUser
+        // Show overlay
+        self.showOverlay("Please wait..")
         
-        user?.getIDTokenForcingRefresh(true, completion: { (idToken, error) in
-            if let error = error {
-                self.displayAlertMessage(message: error.localizedDescription)
+        profileViewModel.getUserDetail { (success, response) in
+            // Dismiss overlay
+            self.dismissOverlay()
+            
+            if !success {
+                self.displayAlertMessage(message: response["error"]!)
                 return
             }
             
-            let url = "https://us-central1-flutterasia-ed3d5.cloudfunctions.net/profileInfo"
-            let parameters = ["token": idToken!]
+            self.userValue = response
             
-            Alamofire.request(url, parameters: parameters).responseJSON { response in
-                self.userValue = response.result.value as? [String: String]
+            self.fullNameLabel.text = self.userValue?["Full name"]
+            self.phoneNumber = self.userValue?["Phone"]
+            self.profileImageView.loadProfileImageCache(urlString: (self.userValue?["profileImageUrl"])!)
 
-                self.fullNameLabel.text = self.userValue?["Full name"]
-                self.phoneNumber = self.userValue?["Phone"]
-                self.profileImageView.loadProfileImageCache(urlString: (self.userValue?["profileImageUrl"])!)
-                
-                // Table View
-                self.userTableView.reloadData()
-            }
-        })
+            // Table View
+            self.userTableView.reloadData()
+        }
     }
     
     @IBAction func phoneButton(_ sender: Any) {
