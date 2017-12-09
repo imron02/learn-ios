@@ -15,6 +15,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var loginViewModel = LoginViewModel()
     private var user = User()
@@ -22,8 +23,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Textfield delegate
         textFieldDelegate()
+        eventOnKeyboardShow()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -93,6 +94,27 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    @objc func keyboardWillBeShown(notification: NSNotification) {
+        var userInfo = notification.userInfo!
+        var keyboardFrame: CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset: UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.scrollView.contentInset = contentInset
+    }
+    
+    @objc private func keyboardWillBeHide(notification: NSNotification) {
+        let contentInset: UIEdgeInsets = UIEdgeInsets.zero
+        self.scrollView.contentInset = contentInset
+    }
+    
+    func eventOnKeyboardShow() -> Void {
+        // Move up content on keyboard show
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWillBeShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWillBeHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
 
 }
