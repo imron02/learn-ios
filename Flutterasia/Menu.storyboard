@@ -49,6 +49,9 @@
                                         <state key="normal" title="More">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="xtr-eV-iCF" kind="show" identifier="" id="dPk-Yu-RWf"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Vdm-T4-gbR">
                                         <rect key="frame" x="100.5" y="196" width="120" height="50"/>
@@ -62,6 +65,9 @@
                                                         <state key="normal" image="chat-bubble">
                                                             <attributedString key="attributedTitle"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="messageButton:" destination="VHI-9C-DzS" eventType="touchUpInside" id="FbA-2W-N7S"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.45362432139999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -143,14 +149,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="NEc-AD-81Y">
-                                        <rect key="frame" x="0.0" y="99.5" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NEc-AD-81Y" id="8pZ-h4-QKD">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </prototypes>
                                 <sections/>
                                 <connections>
@@ -180,6 +178,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ztx-Ab-yWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1779.375" y="567.25352112676057"/>
+        </scene>
+        <!--MoreMenuStoryboard-->
+        <scene sceneID="Iwq-8W-yuG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MoreMenuStoryboard" id="xtr-eV-iCF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="coY-0I-PsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2459" y="569"/>
         </scene>
         <!--Find Love-->
         <scene sceneID="3kD-oq-d2q">
@@ -211,7 +217,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Find Love" image="love-white" id="mky-xU-t12"/>
+                    <tabBarItem key="tabBarItem" title="Find Love" image="love" id="mky-xU-t12"/>
                     <connections>
                         <outlet property="welcomeLabel" destination="cVv-qb-9nB" id="z3p-Ff-f7X"/>
                     </connections>
@@ -249,6 +255,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tSW-yp-eBt">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="VHI-9C-DzS" kind="relationship" relationship="rootViewController" id="LuD-tC-QEN"/>
                     </connections>
@@ -261,7 +270,7 @@
     <resources>
         <image name="chat-bubble" width="30" height="30"/>
         <image name="empty_profile" width="300" height="300"/>
-        <image name="love-white" width="30" height="30"/>
+        <image name="love" width="30" height="30"/>
         <image name="phone" width="30" height="30"/>
         <image name="user" width="30" height="30"/>
     </resources>
