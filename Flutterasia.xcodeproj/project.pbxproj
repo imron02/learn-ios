@@ -13,10 +13,13 @@
 		292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292A52CF1F44929500D8DE7C /* RegisterController.swift */; };
 		294424A11F6585F300E23086 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294424A01F6585F300E23086 /* Menu.storyboard */; };
 		294424A41F65948F00E23086 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294424A31F65948F00E23086 /* ProfileController.swift */; };
-		295D15181FB3DC25002C6955 /* MoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295D15171FB3DC25002C6955 /* MoreController.swift */; };
 		295F43921F7171E2005281F5 /* PicturePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295F43911F7171E2005281F5 /* PicturePicker.swift */; };
 		296433141F88C68E004DEA8E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296433131F88C68E004DEA8E /* LoginViewModel.swift */; };
 		2984BC861F5A85BF0046118F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2984BC851F5A85BF0046118F /* Util.swift */; };
+		29A15B261FDD20280039C433 /* MoreMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A15B251FDD20280039C433 /* MoreMenuTableViewController.swift */; };
+		29A15B281FDD20620039C433 /* MoreMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29A15B271FDD20620039C433 /* MoreMenuStoryboard.storyboard */; };
+		29B4E5841FDD2B0600C2DF36 /* FormProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E5831FDD2B0600C2DF36 /* FormProfileViewController.swift */; };
+		29B4E5861FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B4E5851FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard */; };
 		29BD8BDD1F7F3E39008FB3B8 /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BD8BDC1F7F3E39008FB3B8 /* Overlay.swift */; };
 		29D379FB1F8892E70019E108 /* ProfileImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D379FA1F8892E70019E108 /* ProfileImageCache.swift */; };
 		29D622CC1F444BF500CC512B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D622CB1F444BF500CC512B /* AppDelegate.swift */; };
@@ -36,10 +39,13 @@
 		292A52CF1F44929500D8DE7C /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		294424A01F6585F300E23086 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		294424A31F65948F00E23086 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
-		295D15171FB3DC25002C6955 /* MoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreController.swift; sourceTree = "<group>"; };
 		295F43911F7171E2005281F5 /* PicturePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturePicker.swift; sourceTree = "<group>"; };
 		296433131F88C68E004DEA8E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		2984BC851F5A85BF0046118F /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ../Util.swift; sourceTree = "<group>"; };
+		29A15B251FDD20280039C433 /* MoreMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuTableViewController.swift; sourceTree = "<group>"; };
+		29A15B271FDD20620039C433 /* MoreMenuStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoreMenuStoryboard.storyboard; sourceTree = "<group>"; };
+		29B4E5831FDD2B0600C2DF36 /* FormProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormProfileViewController.swift; sourceTree = "<group>"; };
+		29B4E5851FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FormProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		29BD8BDC1F7F3E39008FB3B8 /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		29D379FA1F8892E70019E108 /* ProfileImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCache.swift; sourceTree = "<group>"; };
 		29D622C81F444BF500CC512B /* Flutterasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flutterasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,7 +82,6 @@
 				294424A31F65948F00E23086 /* ProfileController.swift */,
 				29D622CD1F444BF500CC512B /* HomeController.swift */,
 				294424A01F6585F300E23086 /* Menu.storyboard */,
-				295D15171FB3DC25002C6955 /* MoreController.swift */,
 				2922FF0D1FDB5D0E001051D1 /* ProfileViewModel.swift */,
 			);
 			name = Menu;
@@ -92,6 +97,15 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
+		29A15B201FDD1DEE0039C433 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				29A15B251FDD20280039C433 /* MoreMenuTableViewController.swift */,
+				29A15B271FDD20620039C433 /* MoreMenuStoryboard.storyboard */,
+			);
+			name = More;
+			sourceTree = "<group>";
+		};
 		29A676C81F4684DE00BE4858 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +117,15 @@
 				29D78A5D1F9302D000F5F5F1 /* RegisterViewModel.swift */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		29B4E5821FDD2AC700C2DF36 /* Form Profile */ = {
+			isa = PBXGroup;
+			children = (
+				29B4E5831FDD2B0600C2DF36 /* FormProfileViewController.swift */,
+				29B4E5851FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard */,
+			);
+			name = "Form Profile";
 			sourceTree = "<group>";
 		};
 		29D622BF1F444BF500CC512B = {
@@ -130,9 +153,11 @@
 				29D622D71F444BF500CC512B /* Info.plist */,
 				29D622CB1F444BF500CC512B /* AppDelegate.swift */,
 				29D622D21F444BF500CC512B /* Assets.xcassets */,
+				29B4E5821FDD2AC700C2DF36 /* Form Profile */,
 				29A676C81F4684DE00BE4858 /* Login */,
 				294424A21F658F6600E23086 /* Menu */,
 				29DEC72D1F88C2B600EDF012 /* Models */,
+				29A15B201FDD1DEE0039C433 /* More */,
 				29FFEB071F6B685600C88DC8 /* Profile */,
 				2984BC871F5A85CE0046118F /* Util */,
 			);
@@ -237,11 +262,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B4E5861FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard in Resources */,
 				29D622D31F444BF500CC512B /* Assets.xcassets in Resources */,
 				294424A11F6585F300E23086 /* Menu.storyboard in Resources */,
 				29FFEB061F6B683600C88DC8 /* ProfileDetail.storyboard in Resources */,
 				29F491FB1F4FBF7D00343791 /* Main.storyboard in Resources */,
 				29035CE71F64D3D700C96611 /* GoogleService-Info.plist in Resources */,
+				29A15B281FDD20620039C433 /* MoreMenuStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +355,6 @@
 			files = (
 				295F43921F7171E2005281F5 /* PicturePicker.swift in Sources */,
 				29BD8BDD1F7F3E39008FB3B8 /* Overlay.swift in Sources */,
-				295D15181FB3DC25002C6955 /* MoreController.swift in Sources */,
 				292A52D01F44929500D8DE7C /* RegisterController.swift in Sources */,
 				294424A41F65948F00E23086 /* ProfileController.swift in Sources */,
 				29D379FB1F8892E70019E108 /* ProfileImageCache.swift in Sources */,
@@ -336,10 +362,12 @@
 				29D622CE1F444BF500CC512B /* HomeController.swift in Sources */,
 				29D622CC1F444BF500CC512B /* AppDelegate.swift in Sources */,
 				2922FF0E1FDB5D0E001051D1 /* ProfileViewModel.swift in Sources */,
+				29A15B261FDD20280039C433 /* MoreMenuTableViewController.swift in Sources */,
 				29D78A5E1F9302D000F5F5F1 /* RegisterViewModel.swift in Sources */,
 				296433141F88C68E004DEA8E /* LoginViewModel.swift in Sources */,
 				29FFEB091F6B6EB600C88DC8 /* ProfileDetailController.swift in Sources */,
 				29F491FD1F4FC4D700343791 /* LoginController.swift in Sources */,
+				29B4E5841FDD2B0600C2DF36 /* FormProfileViewController.swift in Sources */,
 				29DEC72C1F88C2AC00EDF012 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
