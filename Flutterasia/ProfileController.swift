@@ -66,6 +66,11 @@ class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataS
         UIApplication.shared.openURL(number)
     }
     
+    @IBAction func messageButton(_ sender: Any) {
+        guard let number = URL(string: "sms://" + phoneNumber!) else { return }
+        UIApplication.shared.openURL(number)
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "User Information"
     }
