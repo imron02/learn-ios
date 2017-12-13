@@ -9,8 +9,9 @@
 import UIKit
 import FirebaseAuth
 import Alamofire
+import MessageUI
 
-class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataSource {
+class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var dateOfBirthLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -67,8 +68,21 @@ class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataS
     }
     
     @IBAction func messageButton(_ sender: Any) {
-        guard let number = URL(string: "sms://" + phoneNumber!) else { return }
-        UIApplication.shared.openURL(number)
+        if MFMessageComposeViewController.canSendText() {
+            let composeVC = MFMessageComposeViewController()
+            composeVC.messageComposeDelegate = self
+
+            // Configure the fields of the interface.
+            composeVC.recipients = [phoneNumber!]
+            composeVC.body = "Hello from California!"
+
+            // Present the view controller modally.
+            self.present(composeVC, animated: true, completion: nil)
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        dismiss(animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
