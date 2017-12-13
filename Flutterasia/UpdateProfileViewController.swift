@@ -1,5 +1,5 @@
 //
-//  FormProfileViewController.swift
+//  UpdateProfileViewController.swift
 //  Flutterasia
 //
 //  Created by Imron Rosdiana on 10/12/17.
@@ -8,10 +8,8 @@
 
 import UIKit
 
-class FormProfileViewController: UIViewController {
-
+class UpdateProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 }
