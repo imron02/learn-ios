@@ -32,8 +32,8 @@ class RegisterViewModel {
         return user.phone!
     }
     
-    func createUser(data: User, completion: @escaping CompletionHandler) -> Void {
-        Auth.auth().createUser(withEmail: data.email!, password: data.password!) { (user, error) in
+    func createUser(data: User, completion: @escaping CompletionHandler) {
+        Auth.auth().createUser(withEmail: data.email!, password: data.password!) { (_, error) in
             if let firebaseError = error {
                 completion(false, firebaseError.localizedDescription)
                 return
@@ -43,7 +43,7 @@ class RegisterViewModel {
         }
     }
     
-    func storeImage(image: UIImage, completion: @escaping CompletionHandler) -> Void {
+    func storeImage(image: UIImage, completion: @escaping CompletionHandler) {
         let storageRef = Storage.storage().reference()
         let imageName = NSUUID().uuidString
         let imageRef = storageRef.child("profileImages/\(imageName).png")

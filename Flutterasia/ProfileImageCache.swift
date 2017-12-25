@@ -19,7 +19,7 @@ extension UIImageView {
         }
         
         let url = URLRequest(url: URL(string: urlString)!)
-        URLSession.shared.dataTask(with: url as URLRequest, completionHandler: { (data, response, error) in
+        URLSession.shared.dataTask(with: url as URLRequest, completionHandler: { (data, _, error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
                 return

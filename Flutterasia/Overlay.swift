@@ -9,12 +9,12 @@
 import UIKit
 
 extension UIViewController {
-    func showOverlay(_ text: String) -> Void {
-        let alert = LoadingOverlay.showLoadingOverlay(message: text);
+    func showOverlay(_ text: String) {
+        let alert = LoadingOverlay.showLoadingOverlay(message: text)
         self.present(alert, animated: true, completion: nil)
     }
     
-    func dismissOverlay() -> Void {
+    func dismissOverlay() {
         LoadingOverlay.dismissLoadingOverlay()
     }
 }
@@ -34,7 +34,7 @@ open class LoadingOverlay: NSObject {
         return alert!
     }
     
-    open class func dismissLoadingOverlay() -> Void {
+    open class func dismissLoadingOverlay() {
         loading?.stopAnimating()
         alert?.dismiss(animated: true, completion: nil)
     }

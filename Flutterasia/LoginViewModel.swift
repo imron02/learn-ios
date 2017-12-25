@@ -29,8 +29,8 @@ class LoginViewModel {
         return user.phone!
     }
     
-    func login(email: String, password: String, completion: @escaping CompletionHandler) -> Void {
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+    func login(email: String, password: String, completion: @escaping CompletionHandler) {
+        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
             if let firebaseError = error {
                 completion(false, firebaseError.localizedDescription)
                 return

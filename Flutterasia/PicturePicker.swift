@@ -12,15 +12,14 @@ let picker = UIImagePickerController()
 
 extension RegisterController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    
-    @objc func openGallery() -> Void {
+    @objc func openGallery() {
         picker.delegate = self
         picker.allowsEditing = true
         
         present(picker, animated: true, completion: nil)
     }
     
-    @objc func openCamera() -> Void {
+    @objc func openCamera() {
         picker.delegate = self
         picker.sourceType = .camera
         picker.allowsEditing = true
@@ -29,7 +28,7 @@ extension RegisterController: UIImagePickerControllerDelegate, UINavigationContr
         present(picker, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         var selectedImageFromPicker: UIImage?
         
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {

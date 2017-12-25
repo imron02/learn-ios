@@ -24,7 +24,7 @@ class HomeController: UIViewController {
             welcomeLabel.text = "Welcome \(displayName!)"
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,12 +39,14 @@ class HomeController: UIViewController {
             
             // Set to login page
             let loginStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let loginController = loginStoryboard.instantiateViewController(withIdentifier: "LoginController") as! LoginController
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let loginController = loginStoryboard.instantiateViewController(withIdentifier: "LoginController")
+                as? LoginController
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
             
-            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: loginController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
-                appDelegate.window?.rootViewController = loginController
-                appDelegate.window?.makeKeyAndVisible()
+            UIView.transition(from: (appDelegate?.window?.rootViewController?.view)!,
+                              to: (loginController?.view)!, duration: 0.6, options: [.transitionCrossDissolve]) { (_) in
+                                appDelegate?.window?.rootViewController = loginController
+                                appDelegate?.window?.makeKeyAndVisible()
             }
         } catch let signOutError as NSError {
             self.displayAlertMessage(message: signOutError.localizedDescription)
@@ -52,4 +54,3 @@ class HomeController: UIViewController {
     }
     
 }
-

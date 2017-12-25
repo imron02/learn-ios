@@ -12,7 +12,7 @@ import FirebaseAuth
 class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBAction func unwindToLogInScreen(unwindSegue: UIStoryboardSegue) {}
-
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -22,15 +22,16 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         textFieldDelegate()
         eventOnKeyboardShow()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,12 +41,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return UIStatusBarStyle.lightContent
     }
     
-    func textFieldDelegate() -> Void {
+    func textFieldDelegate() {
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
     }
     
-    func processLogin() -> Void {
+    func processLogin() {
         user.email = emailTextField.text
         user.password = passwordTextField.text
         
@@ -59,7 +60,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         self.showOverlay("Please wait..")
         
         // Check firebase data
-        loginViewModel.login(email: user.email!, password: user.password!) { (success, error) in
+        loginViewModel.login(email: user.email!, password: user.password!) { (_, error) in
             self.dismissOverlay()
             
             if error != nil {
@@ -69,12 +70,15 @@ class LoginController: UIViewController, UITextFieldDelegate {
             
             // Set to main page
             let mainStoryboard = UIStoryboard(name: "Menu", bundle: nil)
-            let tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MenuTabbar") as! UITabBarController
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "MenuTabbar")
+                as? UITabBarController
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
             
-            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: tabBarController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
-                appDelegate.window?.rootViewController = tabBarController
-                appDelegate.window?.makeKeyAndVisible()
+            UIView.transition(from: (appDelegate?.window?.rootViewController?.view)!,
+                              to: (tabBarController?.view)!, duration: 0.6,
+                              options: [.transitionCrossDissolve]) { (_) in
+                                appDelegate?.window?.rootViewController = tabBarController
+                                appDelegate?.window?.makeKeyAndVisible()
             }
         }
     }
@@ -86,7 +90,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         
-        if (textField == passwordTextField) {
+        if textField == passwordTextField {
             processLogin()
         }
         return true
@@ -98,7 +102,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @objc func keyboardWillBeShown(notification: NSNotification) {
         var userInfo = notification.userInfo!
-        var keyboardFrame: CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        var keyboardFrame: CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)!.cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         var contentInset: UIEdgeInsets = self.scrollView.contentInset
@@ -111,10 +115,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
         self.scrollView.contentInset = contentInset
     }
     
-    func eventOnKeyboardShow() -> Void {
+    func eventOnKeyboardShow() {
         // Move up content on keyboard show
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWillBeShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWillBeHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWillBeShown),
+                                               name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWillBeHide),
+                                               name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
-
+    
 }

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class RegisterController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
@@ -37,14 +37,15 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
     
-    func textFieldDelegate() -> Void {
+    func textFieldDelegate() {
         // Delegate text field
         self.fullNameTextField.delegate = self
         self.emailTextField.delegate = self
@@ -52,7 +53,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         self.retypePasswordTextField.delegate = self
     }
     
-    func textFieldProperties() -> Void {
+    func textFieldProperties() {
         let borderWidth = CGFloat(1.0)
         let borderColor = UIColor(red: 73, green: 73, blue: 73, alpha: 1).cgColor
         let cornerRadius = CGFloat(10.0)
@@ -84,30 +85,31 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         profileImageView.clipsToBounds = true
     }
     
-    func scrollViewTapGesture() -> Void {
+    func scrollViewTapGesture() {
         // Scroll view hide keyboard
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(RegisterController.dismissKeyboard))
         scrollView.addGestureRecognizer(tap)
     }
     
-    func profileImageTapGesture() -> Void {
+    func profileImageTapGesture() {
         profileImageView.isUserInteractionEnabled = true
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseSourcePicture))
-         profileImageView.addGestureRecognizer(tap)
+        profileImageView.addGestureRecognizer(tap)
     }
     
     @objc func chooseSourcePicture() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let cameraButton = UIAlertAction(title: "Take Photo", style: .default) { (action) in
+        let cameraButton = UIAlertAction(title: "Take Photo", style: .default) { (_) in
             self.openCamera()
         }
         
-        let galleryButton = UIAlertAction(title: "Choose Photo", style: .default) { (action) in
+        let galleryButton = UIAlertAction(title: "Choose Photo", style: .default) { (_) in
             self.openGallery()
         }
         
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             print("Cancel")
         }
         
@@ -118,11 +120,13 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
-    func eventOnKeyboardShow() -> Void {
+    func eventOnKeyboardShow() {
         // Move up content on keyboard show
         scrollView.contentSize = CGSize(width: 400, height: 2300)
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeShown), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeShown),
+                                               name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeHide),
+                                               name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
     
     @IBAction func registerButtonTapped(_ sender: Any) {
@@ -133,11 +137,12 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         let retypePassword = retypePasswordTextField.text!
         
         // Check empty field
-        if user.fullName!.isEmpty || user.email!.isEmpty || user.phone!.isEmpty || user.password!.isEmpty || retypePassword.isEmpty {
+        if user.fullName!.isEmpty || user.email!.isEmpty || user.phone!.isEmpty
+            || user.password!.isEmpty || retypePassword.isEmpty {
             displayAlertMessage(message: "All field are required.")
             return
         }
-
+        
         // Check password and repeat password is same
         if user.password != retypePassword {
             displayAlertMessage(message: "Password do not match")
@@ -157,12 +162,12 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         self.storeAuthData(data: user)
     }
     
-    func storeAuthData(data: User) -> Void {
+    func storeAuthData(data: User) {
         registerViewModel.createUser(data: data) { (success, result) in
             if !success {
                 // Dismiss overlays
                 self.dismissOverlay()
-
+                
                 self.displayAlertMessage(message: result!)
                 return
             }
@@ -191,7 +196,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func createUserDB(data: [String: String]) -> Void {
+    func createUserDB(data: [String: String]) {
         let firUser = Auth.auth().currentUser!
         
         self.registerViewModel.createUserDoc(uid: firUser.uid, data: data) { (success, result) in
@@ -207,17 +212,21 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     func displaySuccessMessage(message: String) {
-        let alertMessage = UIAlertController(title: "Success", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertMessage = UIAlertController(title: "Success", message: message,
+                                             preferredStyle: UIAlertControllerStyle.alert)
         
-        let btnAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (action) in
+        let btnAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (_) in
             // Set to main page
             let tabBarStoryboard = UIStoryboard(name: "Menu", bundle: nil)
-            let tabBarController = tabBarStoryboard.instantiateViewController(withIdentifier: "MenuTabbar") as! UITabBarController
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let tabBarController = tabBarStoryboard.instantiateViewController(withIdentifier: "MenuTabbar")
+                as? UITabBarController
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
             
-            UIView.transition(from: (appDelegate.window?.rootViewController?.view)!, to: tabBarController.view, duration: 0.6, options: [.transitionCrossDissolve]) { (action) in
-                appDelegate.window?.rootViewController = tabBarController
-                appDelegate.window?.makeKeyAndVisible()
+            UIView.transition(from: (appDelegate?.window?.rootViewController?.view)!,
+                              to: (tabBarController?.view)!, duration: 0.6,
+                              options: [.transitionCrossDissolve]) { (_) in
+                                appDelegate?.window?.rootViewController = tabBarController
+                                appDelegate?.window?.makeKeyAndVisible()
             }
         }
         
@@ -235,7 +244,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardWillBeShown(notification: NSNotification) {
-        var keyboardFrame: CGRect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        var keyboardFrame: CGRect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)!.cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         var contentInset: UIEdgeInsets = self.scrollView.contentInset
