@@ -11,22 +11,29 @@ import FirebaseAuth
 import Alamofire
 import MessageUI
 
-class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate {
+class ProfileController: UIViewController, UITextFieldDelegate,
+UITableViewDataSource, MFMessageComposeViewControllerDelegate {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var dateOfBirthLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userTableView: UITableView!
     
-    var phoneNumber: String?
-    var rows = ["Full name", "Email", "Phone"]
-    var userValue: [String: String]?
-    
+    private var phoneNumber: String?
+    private var rows = ["Full name", "Email", "Phone"]
+    private var userValue: [String: String]?
     private var profileViewModel = ProfileViewModel()
+    private var isLoad = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.getUser()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !isLoad {
+            self.getUser()
+        } else {
+            self.isUserUpdated()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,8 +44,27 @@ class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataS
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
-    func getUser() -> Void {
+    
+    func isUserUpdated() {
+        // Get updated user
+        profileViewModel.getUserUpdated { (success, response) in
+            if !success {
+                let res = response
+                self.displayAlertMessage(message: res["error"]!)
+            }
+            
+            if let userUpdated = UserDefaults.standard.string(forKey: "userUpdated") {
+                // If user already update, so get data again from server
+                if userUpdated != response["updatedAt"] {
+                    self.getUser()
+                }
+            } else {
+                self.getUser()
+            }
+        }
+    }
+    
+    func getUser() {
         // Show overlay
         self.showOverlay("Please wait..")
         
@@ -56,9 +82,12 @@ class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataS
             self.fullNameLabel.text = self.userValue?["Full name"]
             self.phoneNumber = self.userValue?["Phone"]
             self.profileImageView.loadProfileImageCache(urlString: (self.userValue?["profileImageUrl"])!)
-
+            
             // Table View
             self.userTableView.reloadData()
+            
+            // First load is success so set is load to true
+            self.isLoad = true
         }
     }
     
@@ -71,17 +100,18 @@ class ProfileController: UIViewController, UITextFieldDelegate, UITableViewDataS
         if MFMessageComposeViewController.canSendText() {
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
-
+            
             // Configure the fields of the interface.
             composeVC.recipients = [phoneNumber!]
-            composeVC.body = "Hello from California!"
-
+            composeVC.body = ""
+            
             // Present the view controller modally.
             self.present(composeVC, animated: true, completion: nil)
         }
     }
     
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController,
+                                      didFinishWith result: MessageComposeResult) {
         dismiss(animated: true, completion: nil)
     }
     
