@@ -19,7 +19,7 @@ UITableViewDataSource, MFMessageComposeViewControllerDelegate {
     @IBOutlet weak var userTableView: UITableView!
     
     private var phoneNumber: String?
-    private var rows = ["Full name", "Email", "Phone"]
+    private var rows = ["Full name", "Email", "Phone", "Gender"]
     private var userValue: [String: String]?
     private var profileViewModel = ProfileViewModel()
     private var isLoad = false

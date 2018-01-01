@@ -15,6 +15,7 @@ class ProfileViewModel {
     typealias CompletionHandler = (Bool, [String: String]) -> Void
     private var user = User()
     private let db = Firestore.firestore()
+    private let currentUser = Auth.auth().currentUser!
     
     var fullName: String {
         return user.fullName!
@@ -45,13 +46,13 @@ class ProfileViewModel {
             if let error = error {
                 completion(false, [
                     "error": error.localizedDescription
-                ])
+                    ])
                 return
             }
-
+            
             let url = "https://us-central1-flutterasia-ed3d5.cloudfunctions.net/profileInfo"
             let parameters = ["token": idToken!]
-
+            
             Alamofire.request(url, parameters: parameters).responseJSON { response in
                 let res = response.result.value as? [String: String]
                 
@@ -79,15 +80,13 @@ class ProfileViewModel {
     }
     
     func getUserUpdated(completion: @escaping CompletionHandler) {
-        let user = Auth.auth().currentUser!
-        
-        let userRef = self.db.collection("users").document(user.uid)
+        let userRef = self.db.collection("users").document(currentUser.uid)
         
         userRef.getDocument { (document, error) in
             if let error = error {
                 completion(false, [
                     "error": error.localizedDescription
-                ])
+                    ])
                 return
             }
             
@@ -95,9 +94,31 @@ class ProfileViewModel {
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss.SS"
-            let dateString = dateFormatter.string(from: (res?["updatedAt"] as? Date)!)
             
+            guard let updatedAt = res?["updatedAt"] else {
+                self.createUserUpdated(completion: completion)
+                return
+            }
+            
+            let dateString = dateFormatter.string(from: (updatedAt as? Date)!)
             completion(true, ["updatedAt": dateString])
         }
+    }
+    
+    private func createUserUpdated(completion: @escaping CompletionHandler) {
+        let userRef = self.db.collection("users").document(currentUser.uid)
+        
+        userRef.updateData([
+            "updatedAt": Date(),
+            "createdAt": Date()
+            ], completion: { err in
+                if let error = err {
+                    completion(false, ["error": error.localizedDescription])
+                    
+                    return
+                }
+                
+                print("success add updatedAt")
+        })
     }
 }
