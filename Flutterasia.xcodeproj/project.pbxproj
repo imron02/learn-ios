@@ -21,6 +21,7 @@
 		29A15B281FDD20620039C433 /* MoreMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29A15B271FDD20620039C433 /* MoreMenuStoryboard.storyboard */; };
 		29B4E5841FDD2B0600C2DF36 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E5831FDD2B0600C2DF36 /* UpdateProfileViewController.swift */; };
 		29B4E5861FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B4E5851FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard */; };
+		29B85BBE1FFA2AE20019ED22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B85BBD1FFA2AE20019ED22 /* LaunchScreen.storyboard */; };
 		29BD8BDD1F7F3E39008FB3B8 /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BD8BDC1F7F3E39008FB3B8 /* Overlay.swift */; };
 		29D379FB1F8892E70019E108 /* ProfileImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D379FA1F8892E70019E108 /* ProfileImageCache.swift */; };
 		29D622CC1F444BF500CC512B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D622CB1F444BF500CC512B /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 		29A15B271FDD20620039C433 /* MoreMenuStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoreMenuStoryboard.storyboard; sourceTree = "<group>"; };
 		29B4E5831FDD2B0600C2DF36 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
 		29B4E5851FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FormProfileStoryboard.storyboard; sourceTree = "<group>"; };
+		29B85BBD1FFA2AE20019ED22 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29BD8BDC1F7F3E39008FB3B8 /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		29D379FA1F8892E70019E108 /* ProfileImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCache.swift; sourceTree = "<group>"; };
 		29D622C81F444BF500CC512B /* Flutterasia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flutterasia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 				29D622D71F444BF500CC512B /* Info.plist */,
 				29D622CB1F444BF500CC512B /* AppDelegate.swift */,
 				29D622D21F444BF500CC512B /* Assets.xcassets */,
+				29B85BBD1FFA2AE20019ED22 /* LaunchScreen.storyboard */,
 				29B4E5821FDD2AC700C2DF36 /* Form Profile */,
 				29A676C81F4684DE00BE4858 /* Login */,
 				294424A21F658F6600E23086 /* Menu */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29B4E5861FDD2B2A00C2DF36 /* FormProfileStoryboard.storyboard in Resources */,
+				29B85BBE1FFA2AE20019ED22 /* LaunchScreen.storyboard in Resources */,
 				29D622D31F444BF500CC512B /* Assets.xcassets in Resources */,
 				294424A11F6585F300E23086 /* Menu.storyboard in Resources */,
 				29FFEB061F6B683600C88DC8 /* ProfileDetail.storyboard in Resources */,
