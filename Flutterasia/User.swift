@@ -14,4 +14,5 @@ class User {
     var password: String?
     var phone: String?
     var profileImageUrl: String?
+    var gender: String?
 }
