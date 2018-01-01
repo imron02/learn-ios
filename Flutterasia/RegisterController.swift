@@ -16,12 +16,15 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var retypePasswordTextField: UITextField!
+    @IBOutlet weak var genderTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var addPhotoLabel: UILabel!
     
     private var registerViewModel = RegisterViewModel()
     private var user = User()
+    private let genderPicker = UIPickerView()
+    private let gender = ["Select", "Male", "Female"]
     
     var changeImage: Bool = false
     var imageURL: String = ""
@@ -30,10 +33,13 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         scrollViewTapGesture()
-        eventOnKeyboardShow()
         textFieldDelegate()
         profileImageTapGesture()
         textFieldProperties()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        eventOnKeyboardShow()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -46,11 +52,17 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDelegate() {
+        // Delegate for picker view
+        genderPicker.delegate = self
+        genderPicker.dataSource = self
+        
         // Delegate text field
         self.fullNameTextField.delegate = self
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.retypePasswordTextField.delegate = self
+        self.genderTextField.delegate = self
+        self.genderTextField.inputView = genderPicker
     }
     
     func textFieldProperties() {
@@ -78,6 +90,10 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         retypePasswordTextField.layer.borderWidth = borderWidth
         retypePasswordTextField.layer.borderColor = borderColor
         retypePasswordTextField.layer.cornerRadius = cornerRadius
+        
+        genderTextField.layer.borderWidth = borderWidth
+        genderTextField.layer.borderColor = borderColor
+        genderTextField.layer.cornerRadius = cornerRadius
         
         profileImageView.layer.borderWidth = borderWidth
         profileImageView.layer.borderColor = borderColor
@@ -122,7 +138,6 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     
     func eventOnKeyboardShow() {
         // Move up content on keyboard show
-        scrollView.contentSize = CGSize(width: 400, height: 2300)
         NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeShown),
                                                name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(RegisterController.keyboardWillBeHide),
@@ -135,10 +150,11 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         user.phone = phoneTextField.text!
         user.password = passwordTextField.text!
         let retypePassword = retypePasswordTextField.text!
+        user.gender = genderTextField.text!.lowercased()
         
         // Check empty field
         if user.fullName!.isEmpty || user.email!.isEmpty || user.phone!.isEmpty
-            || user.password!.isEmpty || retypePassword.isEmpty {
+            || user.password!.isEmpty || retypePassword.isEmpty || gender.isEmpty {
             displayAlertMessage(message: "All field are required.")
             return
         }
@@ -188,6 +204,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                     "fullName": self.user.fullName!,
                     "email": self.user.email!,
                     "phone": self.user.phone!,
+                    "gender": self.user.gender!,
                     "profileImageUrl": profileImageURL!
                 ]
                 
@@ -244,15 +261,38 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardWillBeShown(notification: NSNotification) {
-        var keyboardFrame: CGRect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)!.cgRectValue
+        var userInfo = notification.userInfo!
+        var keyboardFrame: CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)!.cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
         var contentInset: UIEdgeInsets = self.scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height + 35
-        scrollView.contentInset = contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.scrollView.contentInset = contentInset
     }
     
     @objc private func keyboardWillBeHide() {
-        scrollView.contentOffset = .zero
+        let contentInset: UIEdgeInsets = UIEdgeInsets.zero
+        self.scrollView.contentInset = contentInset
+    }
+}
+
+extension RegisterController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return gender.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return gender[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if gender[row].lowercased() != "select" {
+            self.genderTextField.text = gender[row]
+            self.genderTextField.endEditing(true)
+        }
     }
 }
